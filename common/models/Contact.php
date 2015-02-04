@@ -24,6 +24,10 @@ use Yii;
  */
 class Contact extends \yii\db\ActiveRecord
 {
+    const CONTACT_PRIMARY_YES = 1;
+    const CONTACT_PRIMARY_NO = 0;
+    const CONTACT_INVALID_YES = 1;
+    const CONTACT_INVALID_NO = 0;
     /**
      * @inheritdoc
      */
@@ -51,16 +55,16 @@ class Contact extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'location_id' => Yii::t('common\messages', 'location'),
-            'user_id' => Yii::t('common\messages', 'user id'),
-            'contact_type' => Yii::t('common\messages', 'contact type'),
-            'intlcode' => Yii::t('common\messages', 'international code'),
-            'areacode' => Yii::t('common\messages', 'areacode'),
-            'contact_detail' => Yii::t('common\messages', 'detail'),
-            'updated_at' => Yii::t('common\messages', 'updated time'),
-            'created_at' => Yii::t('common\messages', 'created time'),
-            'is_primary' => Yii::t('common\messages', 'primary contact'),
-            'is_invalid' => Yii::t('common\messages', 'invalid contact'),
+            'location_id' => Yii::t('frontend', 'location'),
+            'user_id' => Yii::t('frontend', 'user id'),
+            'contact_type' => Yii::t('frontend', 'contact type'),
+            'intlcode' => Yii::t('frontend', 'international code'),
+            'areacode' => Yii::t('frontend', 'areacode'),
+            'contact_detail' => Yii::t('frontend', 'detail'),
+            'updated_at' => Yii::t('frontend', 'updated time'),
+            'created_at' => Yii::t('frontend', 'created time'),
+            'is_primary' => Yii::t('frontend', 'primary contact'),
+            'is_invalid' => Yii::t('frontend', 'invalid contact'),
         ];
     }
 

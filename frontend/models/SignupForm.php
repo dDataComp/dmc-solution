@@ -25,13 +25,13 @@ class SignupForm extends Model
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => \Yii::t('frontend','This username has already been taken.')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['contact_detail', 'filter', 'filter' => 'trim'],
             ['contact_detail', 'required'],
             ['contact_detail', 'email'],
-            ['contact_detail', 'unique', 'targetClass' => '\common\models\Contact', 'message' => 'This email address has already been taken.'],
+            ['contact_detail', 'unique', 'targetClass' => '\common\models\Contact', 'message' => \Yii::t('frontend','This email address has already been taken.')],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
@@ -56,17 +56,19 @@ class SignupForm extends Model
                 $contact = new Contact();
                 $contact->location_id = $location_id;
                 $contact->user_id = $user->id;
-                $contact->contact_type = ContactType::$contactType[1];
+                $contact->contact_type = ContactType::CONTACT_TYPE_PERSONAL_EMAIL;
                 $contact->areacode = null;
                 $contact->intlcode = null;
+                $contact->contact_detail = $this->contact_detail;
                 $contact->created_at = date('Y-m-d H:i:s');
                 $contact->updated_at = date('Y-m-d H:i:s');
-                $contact->is_primary = true;
-                $contact->is_invalid = false;
-                if($contact->save())
+                $contact->is_primary = Contact::CONTACT_PRIMARY_YES;
+                $contact->is_invalid = Contact::CONTACT_INVALID_NO;
+                if(!$contact->save())
                 {
-                    return $user;
+                    throw new \Exception("An error occured while saving the email contact.".json_encode($contact->getErrors()));
                 }
+                return $user;
             }
         }
 

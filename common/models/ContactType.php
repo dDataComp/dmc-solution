@@ -61,9 +61,9 @@ class ContactType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common\messages', 'ID'),
-            'name' => Yii::t('common\messages', 'name'),
-            'description' => Yii::t('common\messages', 'description'),
+            'id' => Yii::t('frontend', 'ID'),
+            'name' => Yii::t('frontend', 'name'),
+            'description' => Yii::t('frontend', 'description'),
         ];
     }
 
